@@ -12,8 +12,8 @@ namespace ModularCircle
 
             for (int i = 0; i < circlePointCount; ++i)
             {
-                alpha = circlePointCount != 0 ? 2 * Math.PI / circlePointCount * i :
-                    2 * Math.PI / 200 * i;
+                circlePointCount = circlePointCount != 0 ? circlePointCount : 200;
+                alpha = 2 * Math.PI / circlePointCount * i;
                 points[i].X = x + Math.Cos(alpha) * radius;
                 points[i].Y = y + Math.Sin(alpha) * radius;
             }
