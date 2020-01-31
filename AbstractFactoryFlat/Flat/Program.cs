@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Flat
 {
@@ -11,22 +12,9 @@ namespace Flat
             Console.WriteLine("Please, type 1 for light style or 2 for dark style.");
             Console.Write("Enter your choice: ");
 
-            string colorScheme = Console.ReadLine();
+            string choice = Console.ReadLine();
 
-            IRoomFactory factory;
-
-            switch (colorScheme)
-            {
-                case "1":
-                    factory = new LightRoomFactory();
-                    break;
-                case "2":
-                    factory = new DarkRoomFactory();
-                    break;
-                default:
-                    factory = new DarkRoomFactory();
-                    break;
-            }
+            IRoomFactory factory = CreateFactory(choice);
 
             var flat = new Flat {Room1 = factory.CreateRoom(), Room2 = factory.CreateRoom()};
 
@@ -38,6 +26,19 @@ namespace Flat
 
             Console.Write("Press any key to close the application: ");
             Console.ReadLine();
+        }
+
+        private static IRoomFactory CreateFactory(string flatStyle)
+        {
+            switch (flatStyle)
+            {
+                case "1":
+                    return new LightRoomFactory();
+                case "2":
+                    return new DarkRoomFactory();
+                default:
+                    return new DarkRoomFactory();
+            }
         }
     }
 }
